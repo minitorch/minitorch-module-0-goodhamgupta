@@ -54,16 +54,22 @@ class Module:
         # TODO: Implement for Task 0.4.
         result = []
 
-        def collect_parameters(input_dict):
+        def collect_parameters(input_dict, starting_key=""):
+            if len(input_dict) == 0:
+                return
             for name, parameter in input_dict.items():
-                result.append((name, parameter))
+                if isinstance(parameter, Module):
+                    # If it is a Module, recursively collect its parameters
+                    collect_parameters(parameter._parameters, starting_key + name + ".")
+                    collect_parameters(parameter._modules, starting_key + name + ".")
+                else:
+                    # If a nn.Parameter, append the full name to the result
+                    full_name = starting_key + name
+                    result.append((full_name, parameter))
 
         collect_parameters(self._parameters)
-        for name, module in self._modules.items():
-            collect_parameters(module._parameters)
-
+        collect_parameters(self._modules)
         return result
-
 
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."
