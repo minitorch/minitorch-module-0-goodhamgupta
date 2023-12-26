@@ -108,10 +108,10 @@ def test_sigmoid(a: float) -> None:
     * It is  strictly increasing.
     """
     # TODO: Implement for Task 0.2.
-    assert(sigmoid(a) >= 0.0 and sigmoid(a) <= 1.0)
+    assert sigmoid(a) >= 0.0 and sigmoid(a) <= 1.0
     assert_close(1 - sigmoid(a), sigmoid(-a))
     assert_close(sigmoid(0), 0.5)
-    assert(sigmoid(a) <= sigmoid(a + 1.0))
+    assert sigmoid(a) <= sigmoid(a + 1.0)
 
 
 @pytest.mark.task0_2
@@ -119,8 +119,7 @@ def test_sigmoid(a: float) -> None:
 def test_transitive(a: float, b: float, c: float) -> None:
     "Test the transitive property of less-than (a < b and b < c implies a < c)"
     if a < b and b < c:
-        assert(lt(a, c))
-
+        assert lt(a, c)
 
 
 @pytest.mark.task0_2
@@ -175,11 +174,10 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
     # TODO: Implement for Task 0.3.
-    individual_sum = [x+y for x,y in zip(ls1, ls2)]
+    individual_sum = [x + y for x, y in zip(ls1, ls2)]
     dis_sum = addLists(ls1, ls2)
     for res_individual, res_dis in zip(individual_sum, dis_sum):
         assert_close(res_individual, res_dis)
-
 
 
 @pytest.mark.task0_3

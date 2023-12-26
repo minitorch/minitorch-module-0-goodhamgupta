@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Sequence, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence, Tuple, Union
 
 
 class Module:
@@ -54,7 +54,9 @@ class Module:
         # TODO: Implement for Task 0.4.
         result = []
 
-        def collect_parameters(input_dict, starting_key=""):
+        def collect_parameters(
+            input_dict: Mapping[str, Union[Module, Parameter]], starting_key: str = ""
+        ) -> None:
             if len(input_dict) == 0:
                 return
             for name, parameter in input_dict.items():
@@ -75,7 +77,9 @@ class Module:
         "Enumerate over all the parameters of this module and its descendents."
         # TODO: Implement for Task 0.4.
         all_parameters = self.named_parameters()
-        return [x[1] for x in all_parameters] # named_parameters returns a tuple. The 2nd element(x[1]) contains the parameters
+        return [
+            x[1] for x in all_parameters
+        ]  # named_parameters returns a tuple. The 2nd element(x[1]) contains the parameters
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """

@@ -70,7 +70,7 @@ def sigmoid(x: float) -> float:
 
     for stability.
     """
-    return (1.0 / (1 + exp(neg(x))))
+    return 1.0 / (1 + exp(neg(x)))
 
 
 def relu(x: float) -> float:
@@ -104,7 +104,7 @@ def log_back(x: float, d: float) -> float:
 
 def inv(x: float) -> float:
     "$f(x) = 1/x$"
-    return (1.0 / x)
+    return 1.0 / x
 
 
 def inv_back(x: float, d: float) -> float:
@@ -187,7 +187,9 @@ def reduce(
          fn(x_1, x_0)))`
     """
     # TODO: Implement for Task 0.3.
-    return lambda ls: start if len(ls) == 0 else reduce(fn, fn(start, ls[0]))(ls[1:])
+    return (
+        lambda ls: start if len(ls) == 0 else reduce(fn, fn(start, ls[0]))(ls[1:])  # type: ignore
+    )
 
 
 def sum(ls: Iterable[float]) -> float:
