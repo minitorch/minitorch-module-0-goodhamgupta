@@ -74,7 +74,8 @@ class Module:
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."
         # TODO: Implement for Task 0.4.
-        return list(self._parameters.values())
+        all_parameters = self.named_parameters()
+        return [x[1] for x in all_parameters] # named_parameters returns a tuple. The 2nd element(x[1]) contains the parameters
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """
